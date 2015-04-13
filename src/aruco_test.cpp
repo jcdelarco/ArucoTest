@@ -33,6 +33,9 @@ or implied, of Rafael Muñoz Salinas.
 #include <opencv2\highgui\highgui.hpp>
 #include "drone/Ardrone.h"
 #include "core/time/TimeTools.h"
+
+#include <thread>
+
 using namespace cv;
 using namespace aruco;
 using namespace ardronepp;
@@ -155,6 +158,18 @@ int main(int argc,char **argv)
         char key=0;
         int index=0;
         //capture until press ESC or until the end of the video
+
+		drone.takeOff();
+
+		std::thread shutdownSystem([](){
+			int cmd;
+			std::cin >> cmd;
+			if (cmd == 0){
+				std::cout << "Shutting down system" << std::endl;
+				drone.land();
+			}
+		});
+		
 		do
 		{
 			TheVideoCapturer.retrieve(TheInputImage);
@@ -172,26 +187,32 @@ int main(int argc,char **argv)
 
 			//print marker info and draw the markers in image
 
+
+
 			TheInputImage.copyTo(TheInputImageCopy);
-			float Tcx,Tcy;
+			float Tcx, Tcy;
 			if (TheMarkers.size() > 1){
-			
+
 				Point2f point1 = TheMarkers[0].getCenter();
 				Point2f point2 = TheMarkers[1].getCenter();
 				Point2f middlePoint;
-				middlePoint.x = (point1.x+ point2.x) / 2;
+				middlePoint.x = (point1.x + point2.x) / 2;
 				middlePoint.y = (point1.y + point2.y) / 2;
 				cv::circle(TheInputImageCopy, middlePoint, 10, Scalar(255, 0, 0, 255), 1, CV_AA);
 				cv::line(TheInputImageCopy, point1, point2, Scalar(255, 0, 0, 255), 1, CV_AA);
-				float Centerx = abs(point1.x-point2.x);
+				float Centerx = abs(point1.x - point2.x);
 				float Centery = abs(point1.y - point2.y);
 				Tcx = Centerx;
 				Tcy = Centery;
-				
+
 				cout << endl;
-				
+
+
 			}
-			cout << "Tcx:" << Tcx << endl;
+			else
+				drone.hovering();
+		
+			
 			if (TheMarkers.size()!=0)      
 				cout<<endl;
 
@@ -225,7 +246,7 @@ int main(int argc,char **argv)
 					TheMarkers[j].id = 0;
 					TheMarkers[j][0].x = TheMarkers[j][0].x + Tcx;
 					TheMarkers[j][0].y = Tcy;
-					/*
+					
 					float Rangosupx = 0.1, Rangoinfx = -0.1;
 					float Rangosupy = 0.1, Rangoinfy = -0.1;
 					float Rangosupz = 0.4, Rangoinfz = 0.1;
@@ -236,22 +257,22 @@ int main(int argc,char **argv)
 					
 					double t0 = STime::get()->getTime();
 
-					if (Tx>Rangosupx)
-						while (STime::get()->getTime() - t0 < 1){
-							drone.translate(0.0f, 0.2f);
-					}
-					else if (Tx<Rangoinfx)
-						while (STime::get()->getTime() - t0 < 1){
+					if (Tx>Rangosupx){
 							drone.translate(0.0f, -0.2f);
+							cout << "Command right" << endl;
 					}
-					if (Tz>Rangosupz) 
-					while (STime::get()->getTime() - t0 < 1){
-						drone.translate(-0.1f, 0.0f);
+					else if (Tx<Rangoinfx){
+							drone.translate(0.0f, 0.2f);
+							cout << "Command left" << endl;
 					}
-					else if (Tz<Rangoinfz)
-					while (STime::get()->getTime() - t0 < 1){
-						drone.translate(0.1f, 0.0f);
-					}*/
+					if (Tz>Rangosupz) {
+						drone.translate(0.2f, 0.0f);
+					cout << "Command front" << endl;
+					}
+					else if (Tz<Rangoinfz){
+						drone.translate(-0.2f, 0.0f);
+					cout << "Command back" << endl;
+					}
 					//cout << "Traslacionx:" <<  << endl;
 					//cout << to << endl;
 					CvDrawingUtils::draw3dAxis(TheInputImageCopy, TheMarkers[j], TheCameraParameters);
