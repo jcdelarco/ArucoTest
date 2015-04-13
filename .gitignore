@@ -1,3 +1,4 @@
+*.o
 *.sdf
 *.opensdf
 *.obj

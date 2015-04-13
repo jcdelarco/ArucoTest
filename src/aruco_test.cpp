@@ -30,9 +30,9 @@ or implied, of Rafael Muñoz Salinas.
 #include <sstream>
 #include "aruco.h"
 #include "cvdrawingutils.h"
-#include <opencv2\highgui\highgui.hpp>
-#include "drone/Ardrone.h"
-#include "core/time/TimeTools.h"
+#include <opencv2/highgui/highgui.hpp>
+#include <drone/Ardrone.h>
+#include <core/time/TimeTools.h>
 
 #include <thread>
 
