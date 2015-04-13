@@ -225,7 +225,7 @@ int main(int argc,char **argv)
 					TheMarkers[j].id = 0;
 					TheMarkers[j][0].x = TheMarkers[j][0].x + Tcx;
 					TheMarkers[j][0].y = Tcy;
-
+					/*
 					float Rangosupx = 0.1, Rangoinfx = -0.1;
 					float Rangosupy = 0.1, Rangoinfy = -0.1;
 					float Rangosupz = 0.4, Rangoinfz = 0.1;
@@ -236,22 +236,22 @@ int main(int argc,char **argv)
 					
 					double t0 = STime::get()->getTime();
 
-					if (Tx<Rangosupx)
+					if (Tx>Rangosupx)
 						while (STime::get()->getTime() - t0 < 1){
 							drone.translate(0.0f, 0.2f);
 					}
-					else if (Tx>Rangoinfx)
+					else if (Tx<Rangoinfx)
 						while (STime::get()->getTime() - t0 < 1){
 							drone.translate(0.0f, -0.2f);
 					}
-					if (Tz<Rangosupz) 
+					if (Tz>Rangosupz) 
 					while (STime::get()->getTime() - t0 < 1){
 						drone.translate(-0.1f, 0.0f);
 					}
-					else if (Tz>Rangoinfz)
+					else if (Tz<Rangoinfz)
 					while (STime::get()->getTime() - t0 < 1){
 						drone.translate(0.1f, 0.0f);
-					}
+					}*/
 					//cout << "Traslacionx:" <<  << endl;
 					//cout << to << endl;
 					CvDrawingUtils::draw3dAxis(TheInputImageCopy, TheMarkers[j], TheCameraParameters);
