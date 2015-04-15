@@ -109,7 +109,7 @@ int main(int argc,char **argv)
 		
         //read from camera or from  file
         if (TheInputVideo.find("live")!=string::npos) {
-	  int vIdx=0;
+          int vIdx=1;
 	  //check if the :idx is here
 	  char cad[100];
       if (TheInputVideo.find(":")!=string::npos) {
@@ -156,7 +156,7 @@ int main(int argc,char **argv)
         cv::createTrackbar("ThresParam2", "in",&iThresParam2, 13, cvTackBarEvents);
 
         char key=0;
-        int index=0;
+        int index=0, imgcounter=0;
         //capture until press ESC or until the end of the video
 
 		drone.takeOff();
@@ -284,7 +284,11 @@ int main(int argc,char **argv)
             //DONE! Easy, right?
             //show input with augmented information and  the thresholded image
             cv::imshow("in",TheInputImageCopy);
-			
+            /*std::stringstream ss;
+            ss << "./image/image_" << imgcounter << ".jpg";
+            cv::imwrite(ss.str(),TheInputImageCopy);
+            std::cout << "storing img in: " << ss.str() << std::endl;
+            imgcounter++;*/
            // cv::imshow("thres",MDetector.getThresholdedImage());
 
             key=cv::waitKey(waitTime);//wait for key to be pressed
