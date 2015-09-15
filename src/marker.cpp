@@ -286,6 +286,7 @@ void Marker::calculateExtrinsics(float markerSizeMeters,cv::Mat  camMatrix,cv::M
     {
         ImagePoints.at<float>(c,0)=((*this)[c].x);
         ImagePoints.at<float>(c,1)=((*this)[c].y);
+		//cout << ImagePoints << endl;
     }
     
     cv::Mat raux,taux;

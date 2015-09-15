@@ -40,19 +40,27 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\opencv\build\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\opencv\build\x86\vc12\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\programming\aeroarms\lib\DroneApplications\src\code;C:\programming\aeroarms\lib\BOViL\src\code;C:\aruco1.2.5-win_32bits_msvc10\lib;C:\programming\ARdrone-pp-master\src;C:\opencv\build\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\programming\aeroarms\build\lib\DroneApplications\src\Debug;C:\programming\aeroarms\build\lib\BOViL\src\Debug;C:\Program Files %28x86%29\Microsoft SDKs\Windows\v7.1A\Lib;C:\aruco-1.2.4\build\bin\Debug;C:\opencv\build\x86\vc12\lib;$(LibraryPath)</LibraryPath>
+    <ExecutablePath>C:\Program Files %28x86%29\Microsoft SDKs\Windows\v7.1A\Bin;C:\Program Files %28x86%29\Microsoft SDKs\Cpp REST SDK for Visual Studio 2013\SDK\bin\x86\Debug;$(ExecutablePath)</ExecutablePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>C:\programming\aeroarms\lib\DroneApplications\src\code;C:\programming\aeroarms\lib\BOViL\src\code;C:\aruco1.2.5-win_32bits_msvc10\include\aruco;C:\Program Files %28x86%29\Microsoft SDKs\Windows\v7.1A\Include;C:\opencv\build\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\programming\aeroarms\build\lib\DroneApplications\src\Release;C:\programming\aeroarms\build\lib\BOViL\src\Release;C:\aruco-1.2.4\build\bin\Release;C:\Program Files %28x86%29\Microsoft SDKs\Windows\v7.1A\Lib;C:\opencv\build\x86\vc12\lib;$(LibraryPath)</LibraryPath>
+    <ExecutablePath>C:\opencv\build\x86\vc12\bin;C:\Program Files %28x86%29\Microsoft SDKs\Windows\v7.1A\Bin;$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Program Files\Microsoft SDKs\Windows\v7.1\Include;C:\Program Files %28x86%29\Microsoft SDKs\Cpp REST SDK for Visual Studio 2013\SDK\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opencv_core2411d.lib;opencv_highgui2411.lib;opencv_imgproc2411.lib;opencv_calib3d2411.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;BOViL.lib;DroneApplications.lib;aruco124.lib;opencv_core2411d.lib;opencv_highgui2411d.lib;opencv_imgproc2411d.lib;opencv_calib3d2411d.lib;opencv_contrib2411.lib;opencv_features2d2411.lib;opencv_flann2411.lib;opencv_gpu2411.lib;opencv_legacy2411d.lib;opencv_ml2411d.lib;opencv_nonfree2411d.lib;opencv_objdetect2411d.lib;opencv_ocl2411d.lib;opencv_photo2411d.lib;opencv_stitching2411d.lib;opencv_superres2411d.lib;opencv_ts2411d.lib;opencv_video2411d.lib;opencv_videostab2411d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\opencv\build\x86\vc12\lib;C:\Program Files\Microsoft SDKs\Windows\v7.1\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -62,11 +70,15 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <UndefinePreprocessorDefinitions>%(UndefinePreprocessorDefinitions)</UndefinePreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>DroneApplications.lib;BOViL.lib;aruco124.lib;opencv_calib3d2411.lib;opencv_contrib2411.lib;opencv_core2411.lib;opencv_features2d2411.lib;opencv_flann2411.lib;opencv_gpu2411.lib;opencv_highgui2411.lib;opencv_imgproc2411.lib;opencv_legacy2411.lib;opencv_ml2411.lib;opencv_nonfree2411.lib;opencv_objdetect2411.lib;opencv_ocl2411.lib;opencv_photo2411.lib;opencv_stitching2411.lib;opencv_superres2411.lib;opencv_ts2411.lib;opencv_video2411.lib;opencv_videostab2411.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Program Files %28x86%29\Microsoft SDKs\Windows\v7.1A\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -76,10 +88,12 @@
     <ClCompile Include="src\board.cpp" />
     <ClCompile Include="src\boarddetector.cpp" />
     <ClCompile Include="src\cameraparameters.cpp" />
+    <ClCompile Include="src\Controller.cpp" />
     <ClCompile Include="src\cvdrawingutils.cpp" />
     <ClCompile Include="src\highlyreliablemarkers.cpp" />
     <ClCompile Include="src\marker.cpp" />
     <ClCompile Include="src\markerdetector.cpp" />
+    <ClCompile Include="src\OctoArcasController.cpp" />
     <ClCompile Include="src\subpixelcorner.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -90,11 +104,16 @@
     <ClInclude Include="src\boarddetector.h" />
     <ClInclude Include="src\cameraparameters.h" />
     <ClInclude Include="src\common.h" />
+    <ClInclude Include="src\comunication.h" />
+    <ClInclude Include="src\Controller.h" />
     <ClInclude Include="src\cvdrawingutils.h" />
+    <ClInclude Include="src\endpacked.h" />
     <ClInclude Include="src\exports.h" />
     <ClInclude Include="src\highlyreliablemarkers.h" />
     <ClInclude Include="src\marker.h" />
     <ClInclude Include="src\markerdetector.h" />
+    <ClInclude Include="src\OctoArcasController.h" />
+    <ClInclude Include="src\packed.h" />
     <ClInclude Include="src\subpixelcorner.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

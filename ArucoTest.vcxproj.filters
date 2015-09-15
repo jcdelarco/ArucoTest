@@ -39,6 +39,12 @@
     <ClCompile Include="src\aruco_test.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\OctoArcasController.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Controller.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ar_omp.h">
@@ -78,6 +84,21 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\common.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OctoArcasController.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Controller.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\comunication.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\endpacked.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\packed.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
